@@ -1,0 +1,33 @@
+{
+  "name": "yd-cmd",
+  "version": "1.0.0",
+  "description": "a command line tool about youdao dictionary",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JiangBao/yd-cmd.git"
+  },
+  "keywords": [
+    "command",
+    "node",
+    "youdao"
+  ],
+  "bin": {
+    "yd": "bin/index.js"
+  },
+  "author": "JiangBao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JiangBao/yd-cmd/issues"
+  },
+  "homepage": "https://github.com/JiangBao/yd-cmd#readme",
+  "dependencies": {
+    "axios": "^0.17.0",
+    "chalk": "^2.3.0",
+    "cheerio": "^1.0.0-rc.2",
+    "is-chinese": "^1.2.5"
+  }
+}
