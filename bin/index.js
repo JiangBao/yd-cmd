@@ -3,6 +3,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const chalk = require('chalk');
 const isChinese = require('is-chinese');
+const ora = require('ora');
 
 const method = process.argv[2];
 const word = process.argv[3];
@@ -44,8 +45,10 @@ switch (method) {
  * get translation result
  */
 function getTranslation() {
+  const loading = ora('Loading result').start();
   axios.get(`http://youdao.com/w${prev}/${encodeURI(word)}`)
     .then((resp) => {
+      loading.stop();
       const $ = cheerio.load(resp.data);
       if (isChinese(word)) {
         $('#results-contents #phrsListTab ul .wordGroup').each((idx, elem) => {
@@ -57,6 +60,8 @@ function getTranslation() {
           console.log(chalk.green(desc), chalk.blue(res));
         });
       } else {
+        const pronounce = $('#phrsListTab .phonetic');
+        console.log(chalk.green('英:'), $(pronounce.get(0)).text(), '\t', chalk.green('美:'), $(pronounce.get(1)).text())
         $('#results-contents #phrsListTab ul li').each((idx, elem) => {
           console.log(chalk.blue($(elem).text()));
         });
